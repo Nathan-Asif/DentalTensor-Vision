@@ -42,7 +42,6 @@ def test_cli_info_command(capsys):
     captured = capsys.readouterr()
     assert "DentalTensor Vision v1.0" in captured.out
     assert "Nathan Asif" in captured.out
-    assert "DaantShaant" in captured.out
     assert "0.687" in captured.out  # mAP@50
     assert "0.680" in captured.out  # Precision
     assert "0.666" in captured.out  # Recall

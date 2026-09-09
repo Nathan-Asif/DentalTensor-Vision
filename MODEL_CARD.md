@@ -1,7 +1,6 @@
 # Model Card: DentalTensor Vision v1.0
 
-Developed by **Nathan Asif**  
-First Production Integration: **DaantShaant**
+Developed by **Nathan Asif**
 
 ---
 
@@ -49,7 +48,7 @@ The model was fine-tuned and calibrated across 10,698 annotated intraoral images
 - Preliminary computer-assisted screening of visible dental and oral mucosal conditions from standard 2D RGB mouth photographs.
 - Spatial localization of visible enamel cavitation, tartar deposits, gingival inflammation, staining, and mucosal ulcerations.
 - Educational, tele-dentistry triaging, and health awareness applications.
-- Integration as a foundational vision perception asset in digital health pipelines (e.g., DaantShaant).
+- Integration as a foundational vision perception asset in digital health pipelines.
 
 ### Out-of-Scope & Prohibited Uses
 - **Definitive Medical Diagnosis**: DentalTensor Vision is not certified for standalone clinical diagnostic determination.
@@ -122,7 +121,7 @@ To balance sensitivity and false-positive suppression across heterogeneous smart
 
 ## 8. Preprocessing Regression Prevention
 
-During platform testing in DaantShaant, it was found that standard computer-vision contrast enhancements such as **CLAHE (Contrast Limited Adaptive Histogram Equalization)** or repeated lossy JPEG re-encoding introduced chromatic artifacts and suppressed legitimate YOLO detections.
+During model validation, it was found that standard computer-vision contrast enhancements such as **CLAHE (Contrast Limited Adaptive Histogram Equalization)** or repeated lossy JPEG re-encoding introduced chromatic artifacts and suppressed legitimate YOLO detections.
 
 DentalTensor Vision strictly mandates **zero-distortion preprocessing**:
 - Original RGB pixels are preserved without adaptive equalization.

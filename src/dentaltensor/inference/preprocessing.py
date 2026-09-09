@@ -1,7 +1,7 @@
 """Image decoding and preprocessing for DentalTensor Vision.
 
 CRITICAL INFERENCE REGRESSION RULE:
-During DaantShaant development, it was discovered that applying contrast enhancements
+During development and validation, it was discovered that applying contrast enhancements
 such as CLAHE (Contrast Limited Adaptive Histogram Equalization) or aggressive lossy
 JPEG re-encoding distorts subtle intraoral pathology cues and suppresses real YOLO detections.
 DentalTensor Vision requires the decoded original image without unnecessary destructive preprocessing.
@@ -119,7 +119,7 @@ def decode_image_bytes_to_bgr(raw: bytes) -> np.ndarray:
 def decode_image_to_bgr(
     image_input: ImageInputType,
 ) -> Tuple[np.ndarray, int, int, Optional[str]]:
-    """Decode image input into a BGR NumPy array matching DaantShaant production semantics.
+    """Decode image input into a BGR NumPy array matching production semantics.
 
     Returns:
         (image_bgr, width, height, source_filename)
@@ -193,7 +193,7 @@ def decode_image_to_bgr(
 def normalize_image(image: np.ndarray, max_edge: int = MAX_EDGE_PX) -> np.ndarray:
     """Normalize image by resizing only when exceeding max_edge, preserving smaller images.
 
-    Ports the canonical DaantShaant normalize_image() semantics.
+    Ports canonical normalize_image() semantics.
     Uses cv2.INTER_AREA interpolation for area-based downsampling.
     """
     h, w = image.shape[:2]

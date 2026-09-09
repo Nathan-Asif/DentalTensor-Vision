@@ -85,7 +85,7 @@ class DentalTensorDetector:
         image_bgr, orig_w, orig_h, detected_source = decode_image_to_bgr(image_input)
         resolved_source = source_id or detected_source
 
-        # Port canonical DaantShaant normalize_image semantics (resizes only if > 1024 max edge)
+        # Port canonical normalize_image semantics (resizes only if > 1024 max edge)
         image_bgr = normalize_image(image_bgr)
         h, w = image_bgr.shape[:2]
 

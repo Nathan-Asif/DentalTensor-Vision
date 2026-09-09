@@ -25,10 +25,23 @@ htmlcov/
 .env
 .env.*
 
-# Datasets, training runs, local predictions
+# Local datasets, training runs, local predictions
 datasets/
 runs/
 predictions/
+Test Images/
+Test Images/*
+
+# Internal project / agent files
+Rules.md
+context.md
+walkthrough.md
+implementation_plan.md
+
+# Development-only scripts
+examples/test_dentaltensor.py
+
+# Model files
 *.pt
 !models/dentaltensor_vision_v1.0.pt
 
@@ -41,5 +54,5 @@ Thumbs.db
 *.swo
 
 
-Test Images/
-Test Images/*
+tests/
+tests/*

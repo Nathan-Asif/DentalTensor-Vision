@@ -8,7 +8,7 @@
 
 DentalTensor Vision v1.0 is a custom-trained oral pathology detection model built on the Ultralytics YOLO11n architecture. It detects visible oral findings—including calculus, caries, gingivitis, tooth discoloration, and oral ulcers—directly from standard 2D photographs.
 
-Developed by **Nathan Asif**. First production integration: **DaantShaant**.
+Developed by **Nathan Asif**.
 
 <p align="left">
   <a href="https://python.org"><img src="https://img.shields.io/badge/Python-%3E%3D3.9-blue.svg" alt="Python"></a>
@@ -257,7 +257,7 @@ DentalTensor Vision executes completely locally and offline. The pipeline consis
 
 ### Zero-Distortion Ingestion Pipeline
 
-During development and validation inside DaantShaant, aggressive preprocessing filters—such as Contrast Limited Adaptive Histogram Equalization (CLAHE) and secondary lossy JPEG re-compression—were empirically verified to suppress subtle pathology margins and reduce detector recall.
+During development and validation, aggressive preprocessing filters—such as Contrast Limited Adaptive Histogram Equalization (CLAHE) and secondary lossy JPEG re-compression—were empirically verified to suppress subtle pathology margins and reduce detector recall.
 
 DentalTensor Vision implements a zero-distortion ingestion pipeline:
 - Decodes image bytes directly into standard RGB arrays.
@@ -358,14 +358,6 @@ DentalTensor Vision is designed for minimal operational overhead:
 
 ---
 
-## DaantShaant Integration
-
-DentalTensor was conceived, trained, and productized by Nathan Asif as the core vision engine for **DaantShaant**, an oral health screening and care-navigation platform developed for the Alibaba Cloud Bano Qabil Hackathon 2026.
-
-Within DaantShaant, DentalTensor Vision functions as the standalone perception layer that analyzes oral photographs and supplies structured findings to downstream user-facing screening workflows.
-
----
-
 ## Project Structure
 
 ```
@@ -378,7 +370,7 @@ DentalTensor-Vision/
 ├── docs/                          # Technical documentation
 ├── examples/
 │   ├── python_usage.py            # Complete Python SDK usage walkthrough
-│   └── test_dentaltensor.py       # Quick verification script
+│   └── README.md                  # Examples documentation
 ├── models/
 │   └── dentaltensor_vision_v1.0.pt # Shipped pre-trained model weights (5.45 MB)
 ├── src/
@@ -452,5 +444,4 @@ Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for de
 
 **Nathan Asif**<br>
 Founder & Developer, DentalTensor<br>
-Creator, DaantShaant<br>
 Repository: [DentalTensor-Vision](https://github.com/Nathan-Asif/DentalTensor-Vision)

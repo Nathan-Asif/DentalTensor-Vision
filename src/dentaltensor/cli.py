@@ -14,7 +14,6 @@ from dentaltensor.config import (
     CANONICAL_CHECKPOINT_NAME,
     CLASSES,
     DEVELOPER,
-    FIRST_INTEGRATION,
     FULL_MODEL_NAME,
     PRODUCTION_THRESHOLDS,
     VERSION,
@@ -28,7 +27,6 @@ def print_banner() -> None:
     print("=" * 60)
     print(f"  {FULL_MODEL_NAME}")
     print(f"  Developer: {DEVELOPER}")
-    print(f"  First Production Integration: {FIRST_INTEGRATION}")
     print("=" * 60)
 
 
@@ -135,7 +133,7 @@ def build_parser() -> argparse.ArgumentParser:
         description=(
             "DentalTensor Vision v1.0 — Pre-trained oral pathology computer vision "
             "built on Ultralytics YOLO11n.\n"
-            "Developed by Nathan Asif. First production integration: DaantShaant."
+            "Developed by Nathan Asif."
         ),
         formatter_class=argparse.RawDescriptionHelpFormatter,
     )

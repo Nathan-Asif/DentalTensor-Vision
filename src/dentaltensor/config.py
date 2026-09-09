@@ -13,7 +13,6 @@ MODEL_FAMILY: str = "DentalTensor Vision"
 VERSION: str = "1.0"
 FULL_MODEL_NAME: str = "DentalTensor Vision v1.0"
 DEVELOPER: str = "Nathan Asif"
-FIRST_INTEGRATION: str = "DaantShaant"
 BASE_ARCHITECTURE: str = "Ultralytics YOLO11n"
 
 # Canonical 5 Finding Classes

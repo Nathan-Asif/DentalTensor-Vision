@@ -59,5 +59,5 @@ DentalTensor Vision is designed as a standalone, lightweight, pre-trained comput
 1. **Pre-Trained Model Product**: The model is already trained. End users only run inference.
 2. **No Cloud Account or API Keys Required**: Executes locally without external dependencies or accounts.
 3. **No Training Dataset at Runtime**: The 10,698-image dataset is not required for running inference.
-4. **Standalone Operation**: DentalTensor Vision does not depend on DaantShaant, Supabase, LangGraph, or cloud LLMs.
+4. **Standalone Operation**: DentalTensor Vision does not depend on Supabase, LangGraph, or cloud LLMs.
 5. **Zero Medical Diagnosis Claims**: The model only produces structured visual findings and bounding boxes.

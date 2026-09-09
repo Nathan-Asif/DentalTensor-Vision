@@ -14,7 +14,6 @@ def test_package_import():
     assert dentaltensor.MODEL_FAMILY == "DentalTensor Vision"
     assert dentaltensor.FULL_MODEL_NAME == "DentalTensor Vision v1.0"
     assert dentaltensor.DEVELOPER == "Nathan Asif"
-    assert dentaltensor.FIRST_INTEGRATION == "DaantShaant"
 
 
 def test_public_classes_and_thresholds():

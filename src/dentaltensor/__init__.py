@@ -6,14 +6,12 @@ computer-vision model built on the Ultralytics YOLO11n architecture and
 distributed as pre-trained weights ready for inference."
 
 Developed by Nathan Asif.
-First production integration: DaantShaant.
 """
 
 from dentaltensor.config import (
     BRAND_NAME,
     CLASSES,
     DEVELOPER,
-    FIRST_INTEGRATION,
     FULL_MODEL_NAME,
     MODEL_FAMILY,
     PRODUCTION_THRESHOLDS,
@@ -36,6 +34,5 @@ __all__ = [
     "MODEL_FAMILY",
     "FULL_MODEL_NAME",
     "DEVELOPER",
-    "FIRST_INTEGRATION",
     "__version__",
 ]

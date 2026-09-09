@@ -3,7 +3,6 @@
 ## DentalTensor Vision v1.0
 
 DentalTensor Vision is an open-source oral pathology computer-vision model and framework developed by **Nathan Asif**.
-First production integration: **DaantShaant**.
 
 Copyright (C) 2026 Nathan Asif.
 
