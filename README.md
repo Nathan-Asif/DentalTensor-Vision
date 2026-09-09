@@ -1,131 +1,69 @@
-# DentalTensor
+<p align="center">
+  <img src="assets/dentaltensor-logo.png" alt="DentalTensor" width="180">
+</p>
 
-## DentalTensor Vision v1.0
+# DentalTensor Vision
 
-**Pre-trained open-source dental computer vision.**  
-Pass an oral image. Receive structured visual findings.  
-No training required.
+**Pre-trained open-source computer vision for detecting visible oral findings.**
 
-Developed by **Nathan Asif**.  
-First production integration: **DaantShaant**.
+DentalTensor Vision v1.0 is a custom-trained oral pathology detection model built on the Ultralytics YOLO11n architecture. It detects visible oral findings—including calculus, caries, gingivitis, tooth discoloration, and oral ulcers—directly from standard 2D photographs.
 
-[![Python](https://img.shields.io/badge/Python-3.9%20%7C%203.10%20%7C%203.11%20%7C%203.12-blue.svg)](https://python.org)
-[![License: AGPL-3.0](https://img.shields.io/badge/License-AGPL--3.0-orange.svg)](LICENSE)
-[![Base Architecture: YOLO11n](https://img.shields.io/badge/Architecture-Ultralytics%20YOLO11n-green.svg)](https://github.com/ultralytics/ultralytics)
-[![Inference: Local](https://img.shields.io/badge/Inference-Local%20%28CPU%20%2F%20Acceleration%29-brightgreen.svg)](#how-inference-works)
-[![Release](https://img.shields.io/badge/Version-v1.0-brightgreen.svg)](https://github.com/Nathan-Asif/DentalTensor-Vision/releases)
+Developed by **Nathan Asif**. First production integration: **DaantShaant**.
 
----
+<p align="left">
+  <a href="https://python.org"><img src="https://img.shields.io/badge/Python-%3E%3D3.9-blue.svg" alt="Python"></a>
+  <a href="https://github.com/Nathan-Asif/DentalTensor-Vision/releases"><img src="https://img.shields.io/badge/version-1.0.0-blue.svg" alt="Version"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/license-AGPL--3.0-orange.svg" alt="License"></a>
+  <a href="https://github.com/ultralytics/ultralytics"><img src="https://img.shields.io/badge/architecture-YOLO11n-green.svg" alt="Architecture"></a>
+  <a href="https://github.com/Nathan-Asif/DentalTensor-Vision/actions/workflows/tests.yml"><img src="https://github.com/Nathan-Asif/DentalTensor-Vision/actions/workflows/tests.yml/badge.svg" alt="Tests"></a>
+</p>
 
-### Key Verified Metrics at a Glance
+<table>
+<tr>
+<td align="center"><b>10,698</b><br>Training Images</td>
+<td align="center"><b>5</b><br>Finding Classes</td>
+<td align="center"><b>0.687</b><br>mAP@50</td>
+<td align="center"><b>0.680</b><br>Precision</td>
+<td align="center"><b>0.666</b><br>Recall</td>
+</tr>
+</table>
 
-| 📊 Training Images | 🏷️ Classes | 🎯 mAP@50 | ⚖️ Precision | 🔍 Recall |
-| :---: | :---: | :---: | :---: | :---: |
-| **10,698** | **5** | **0.687** | **0.680** | **0.666** |
-
-> [!IMPORTANT]
-> **THE MODEL IS ALREADY TRAINED.**  
-> DentalTensor Vision v1.0 ships with pre-trained learned weights (`models/dentaltensor_vision_v1.0.pt`).  
-> **Users do not need to download the training dataset or configure training infrastructure.**  
-> No training is required. No cloud account is required. No API keys are required.  
-> **Install. Load. Predict.**
-
----
-
-## 1. DentalTensor Vision
-
-**DentalTensor Vision v1.0** is a custom-trained and fine-tuned oral pathology computer-vision model built on the Ultralytics YOLO11n architecture and distributed as pre-trained weights ready for inference.
-
-Conceived, trained, and productized by **Nathan Asif**, DentalTensor provides a dedicated, lightweight, high-speed vision detector engineered specifically for intraoral photographic conditions.
-
-DentalTensor-specific engineering includes:
-- **Dental dataset preparation** across 10,698 dental images
-- **Task-specific fine-tuning** on YOLO11n architecture
-- **Hard-negative mining** with healthy dentition pools to suppress false positives
-- **Empirical confidence calibration** tailored to intraoral photography
-- **Class-specific production thresholds** to balance sensitivity and specificity
-- **Destructive preprocessing regression prevention** (no CLAHE / no lossy compression)
-- **Production validation** in the DaantShaant oral health screening platform
+> **Pre-trained and ready for local inference. No training, dataset, cloud account, or API key required.**<br>
+> DentalTensor Vision v1.0 ships with learned weights (`models/dentaltensor_vision_v1.0.pt`). Users install the package, load the pre-trained checkpoint, pass an oral image, and receive structured visual findings.
 
 ---
 
-## 2. What It Does
-
-DentalTensor Vision detects visible oral findings directly from standard 2D photographs (JPEG, PNG, WebP) of human teeth and oral mucosa, outputting structured bounding boxes, confidence values, and calibrated class labels.
-
-### Visual Architecture
-
-```
-                 DENTAL IMAGE (JPEG / PNG / WebP)
-                                │
-                                ▼
-                    DENTALTENSOR VISION v1.0
-                  (Pre-trained YOLO11n weights)
-                                │
-                                ▼
-                         OBJECT DETECTION
-                    (Raw bounding boxes & scores)
-                                │
-                                ▼
-                    CLASS-SPECIFIC CALIBRATION
-          (Calculus: 0.35 | Caries: 0.55 | Gingivitis: 0.50
-           Tooth Discoloration: 0.65 | Oral Ulcer: 0.65)
-                                │
-                                ▼
-                    STRUCTURED VISUAL FINDINGS
-                  (Normalized BBoxes, Confidences, JSON)
-```
-
-```
-[Developer Application / CLI] ──► [DentalTensor Vision] ──► [Structured JSON / Python Result]
-```
-
----
-
-## 3. Real Inference Example
-
-```python
-from dentaltensor import DentalTensorVision
-
-# 1. Load pre-trained DentalTensor weights
-vision = DentalTensorVision()
-
-# 2. Pass dental image and run local inference
-result = vision.predict("teeth.jpg")
-
-# 3. Print structured visual findings
-print(result.to_json(indent=2))
-```
-
----
-
-## 4. Quick Start
+## Quick Start
 
 ### Installation
 
-Clone the repository and install the package:
+Clone the repository and install the package locally:
 
 ```bash
 git clone https://github.com/Nathan-Asif/DentalTensor-Vision.git
 cd DentalTensor-Vision
 
-# Create and activate virtual environment
 python -m venv .venv
 
-# Windows:
+# Windows
 .venv\Scripts\activate
 
-# Linux / macOS:
+# Linux / macOS
 source .venv/bin/activate
 
-# Install DentalTensor Vision
 pip install -e .
 ```
 
 ### Run Prediction (CLI)
 
+Run inference directly on any intraoral photograph:
+
 ```bash
-dentaltensor predict path/to/teeth.jpg --json
+# Formatted table output
+dentaltensor predict path/to/image.jpg
+
+# Formatted JSON output
+dentaltensor predict path/to/image.jpg --json
 ```
 
 ### Run Prediction (Python)
@@ -133,89 +71,113 @@ dentaltensor predict path/to/teeth.jpg --json
 ```python
 from dentaltensor import DentalTensorVision
 
+# Load model with pre-trained weights
 model = DentalTensorVision()
-result = model.predict("teeth.jpg")
-print(result.to_json())
-```
 
-That is all that is required to use the model.
+# Run inference
+result = model.predict("path/to/image.jpg")
+
+# Print structured JSON output
+print(result.to_json(indent=2))
+```
 
 ---
 
-## 5. Python API
+## Python API
 
-DentalTensor Vision is designed as a clean, reusable AI library:
+The `dentaltensor` package provides a lightweight Python interface for embedding oral visual screening into clinical tools, research pipelines, and mobile backends.
+
+### Basic Usage
 
 ```python
 from dentaltensor import DentalTensorVision
 
-# Initialize with pre-trained weights (auto-detects local acceleration or uses CPU)
-vision = DentalTensorVision()
+model = DentalTensorVision()
+result = model.predict("patient_photo.jpg")
 
-# Run prediction
-result = vision.predict("path/to/teeth.jpg")
-
-# Access findings programmatically
 for finding in result.findings:
-    print(
-        finding.class_name,
-        finding.confidence,
-        finding.bbox,
-    )
+    print(f"Finding: {finding.class_name}")
+    print(f"  Confidence: {finding.confidence:.2%}")
+    print(f"  Bounding Box [x1, y1, x2, y2]: {finding.bbox}")
+    print(f"  Normalized Box: {finding.bbox_normalized}")
+    print(f"  Threshold Applied: {finding.threshold_used}")
 ```
 
 ### Device Selection
 
+By default, DentalTensor Vision uses `device="auto"`, which detects compatible local GPU acceleration via PyTorch and falls back to CPU execution if unavailable.
+
 ```python
-# Default: auto-detects acceleration if available, falls back to CPU
-vision = DentalTensorVision(device="auto")
+# Automatic device selection (default)
+model = DentalTensorVision(device="auto")
 
-# Force standard CPU inference (no GPU required)
-vision_cpu = DentalTensorVision(device="cpu")
+# Force standard CPU execution (no GPU required)
+model = DentalTensorVision(device="cpu")
 
-# Explicit CUDA acceleration (if supported)
-vision_cuda = DentalTensorVision(device="cuda")
+# Explicit CUDA acceleration
+model = DentalTensorVision(device="cuda")
 ```
 
-### Confidence Threshold Override
+### Custom Confidence Thresholds
+
+To override production class-specific cutoffs with a custom minimum confidence:
 
 ```python
-# Override per-class cutoffs with a strict global cutoff
-result = vision.predict("teeth.jpg", threshold=0.70)
+# Apply a global minimum confidence cutoff of 0.70
+result = model.predict("patient_photo.jpg", threshold=0.70)
+```
+
+### Input Sources
+
+The `predict()` method accepts file paths (as strings or `pathlib.Path` objects), NumPy arrays (`ndarray`), and PIL `Image` instances:
+
+```python
+from pathlib import Path
+from PIL import Image
+
+# Path object
+result = model.predict(Path("data/test.png"))
+
+# PIL Image
+image = Image.open("data/test.png")
+result = model.predict(image)
 ```
 
 ---
 
-## 6. CLI (Command-Line Interface)
+## CLI
 
-DentalTensor Vision provides an offline command-line interface: `dentaltensor`.
+DentalTensor includes an offline command-line interface: `dentaltensor`.
 
 ```bash
-# Formatted table output
-dentaltensor predict teeth.jpg
+# Predict and display visual table
+dentaltensor predict image.jpg
 
-# Structured JSON output
-dentaltensor predict teeth.jpg --json
+# Output structured JSON
+dentaltensor predict image.jpg --json
 
-# Save JSON findings to file
-dentaltensor predict teeth.jpg --output result.json
+# Save JSON findings to disk
+dentaltensor predict image.jpg --output findings.json
 
-# Select compute device
-dentaltensor predict teeth.jpg --device cpu
-dentaltensor predict teeth.jpg --device cuda
+# Specify compute device
+dentaltensor predict image.jpg --device cpu
+dentaltensor predict image.jpg --device cuda
 
-# View model architecture, metrics, and thresholds
+# Override confidence cutoff
+dentaltensor predict image.jpg --threshold 0.60
+
+# Inspect model checkpoint, parameters, and active thresholds
 dentaltensor info
 
-# View version
+# Print package version
 dentaltensor version
 ```
 
 ---
 
-## 7. Output Schema
+## Example Output
 
-Structured visual findings are returned with deterministic coordinates and metadata:
+Inference returns a structured `DentalVisionResult` schema containing detected bounding boxes, calibrated class labels, confidence scores, image metadata, and execution latency:
 
 ```json
 {
@@ -242,7 +204,7 @@ Structured visual findings are returned with deterministic coordinates and metad
     "height": 480,
     "channels": 3,
     "format": "RGB",
-    "source": "teeth.jpg"
+    "source": "image.jpg"
   },
   "inference_ms": 42
 }
@@ -250,159 +212,245 @@ Structured visual findings are returned with deterministic coordinates and metad
 
 ---
 
-## 8. Supported Findings
+## Supported Findings
 
-| Model Class Name | Canonical Code | Visual Clinical Description | Calibrated Cutoff |
-|---|---|---|---|
-| `calculus` | `calculus` | Supragingival and visible subgingival dental calculus / tartar | **0.35** |
-| `caries` | `caries` | Visible enamel cavitation, dark lesions, and occlusal decay suspects | **0.55** |
-| `gingivitis` | `gingivitis` | Marginal gingival erythema, swelling, and localized gum inflammation | **0.50** |
-| `tooth discoloration` | `tooth_discoloration` | Extrinsic stains, fluorosis staining, and enamel color variation | **0.65** |
-| `oral ulcer` | `oral_ulcer` | Aphthous stomatitis, oral mucosal ulcerations, and visible sores | **0.65** |
+DentalTensor Vision v1.0 classifies and localizes five visible oral findings:
+
+| Class Name | Canonical Key | Visual Finding Description | Production Cutoff |
+|---|---|---|:---:|
+| Calculus | `calculus` | Supragingival and visible subgingival dental calculus / tartar deposits along the gingival margin | `0.35` |
+| Caries | `caries` | Visible enamel cavitation, dark pit/fissure lesions, and coronal structural defects | `0.55` |
+| Gingivitis | `gingivitis` | Marginal gingival erythema, edema, and localized papillary inflammation | `0.50` |
+| Tooth Discoloration | `tooth_discoloration` | Extrinsic surface staining, fluorosis patterns, and pronounced enamel discoloration | `0.65` |
+| Oral Ulcer | `oral_ulcer` | Aphthous lesions, oral mucosal ulcerations, and circumscribed mucosal breaks | `0.65` |
 
 ---
 
-## 9. Model Performance
+## How It Works
 
-All metrics represent audited evaluations on **1,070 untouched validation images** and **1,070 untouched test images**:
+DentalTensor Vision executes completely locally and offline. The pipeline consists of direct image ingestion, single-pass forward detection, and empirical threshold calibration.
 
-| Metric | Benchmark Score |
-|---|---|
-| **Precision** | **0.680** |
-| **Recall** | **0.666** |
-| **mAP@50** | **0.687** |
-| **mAP@50-95** | **0.360** |
-| **Training Set** | 10,698 dental images |
-| **Total Parameters** | 2,583,127 (YOLO11n) |
-| **GFLOPs** | 6.4 (at 640x640) |
+```
+                    INPUT IMAGE (JPEG / PNG / WebP)
+                                  │
+                                  ▼
+                     ZERO-DISTORTION PREPROCESSING
+                    (RGB decode, preserved fidelity)
+                                  │
+                                  ▼
+                       DENTALTENSOR VISION v1.0
+                  (Custom YOLO11n weights, 640x640)
+                                  │
+                                  ▼
+                         BOUNDING BOX ENGINE
+                     (Raw predictions & class scores)
+                                  │
+                                  ▼
+                     CLASS-SPECIFIC CALIBRATION
+            (Calculus: 0.35 | Caries: 0.55 | Gingivitis: 0.50
+             Discoloration: 0.65 | Oral Ulcer: 0.65)
+                                  │
+                                  ▼
+                      STRUCTURED FINDINGS (JSON)
+              (Bounding boxes, confidence, pixel metadata)
+```
+
+### Zero-Distortion Ingestion Pipeline
+
+During development and validation inside DaantShaant, aggressive preprocessing filters—such as Contrast Limited Adaptive Histogram Equalization (CLAHE) and secondary lossy JPEG re-compression—were empirically verified to suppress subtle pathology margins and reduce detector recall.
+
+DentalTensor Vision implements a zero-distortion ingestion pipeline:
+- Decodes image bytes directly into standard RGB arrays.
+- Preserves native dynamic range and subtle tonal gradients essential for identifying early caries and gingival erythema.
+- Avoids contrast-stretching artifacts that produce false-positive discoloration predictions.
+
+---
+
+## Model Performance
+
+All reported metrics represent verified evaluations on held-out test splits (1,070 unseen dental images):
+
+| Metric | Score | Note |
+|---|:---:|---|
+| **mAP@50** | **0.687** | Mean Average Precision at 0.50 IoU intersection |
+| **mAP@50-95** | **0.360** | Mean Average Precision across IoU thresholds 0.50:0.95 |
+| **Precision** | **0.680** | Macro precision across all 5 classes |
+| **Recall** | **0.666** | Macro recall across all 5 classes |
+| **Parameters** | 2,590,815 | Compact footprint for edge and CPU deployment (verified) |
+| **GFLOPs** | 6.5 | Computation at standard 640×640 input resolution (verified) |
+| **Checkpoint Size** | 5.45 MB | Shipped in `models/dentaltensor_vision_v1.0.pt` |
 
 ### Training Diagnostics
 
-| Training Convergence | Confusion Matrix |
-| :---: | :---: |
-| ![Training Results](assets/metrics/training_results.png) | ![Confusion Matrix](assets/metrics/confusion_matrix.png) |
+The model converged smoothly over its training schedule, demonstrating strong class separation on the confusion matrix:
+
+<p align="center">
+  <img src="assets/metrics/training_results.png" alt="Training Convergence Metrics" width="48%">
+  <img src="assets/metrics/confusion_matrix.png" alt="Validation Confusion Matrix" width="48%">
+</p>
 
 ---
 
-## 10. How Inference Works
+## Confidence Calibration
 
-DentalTensor Vision v1.0 implements **local inference**. It executes completely offline without external network access after dependencies and weights are installed.
+Object detectors trained on clinical images exhibit non-uniform score distributions across classes. Using a single global confidence cutoff either admits excessive false positives for common findings or suppresses true positives for subtle lesions.
 
-- **Pre-Trained Weights**: Ships with `models/dentaltensor_vision_v1.0.pt` (5,450,330 bytes, SHA-256: `42BF517DED4EB15EEBE6B5361EBF9E6AB21D8488098C4E3E4CCFE5912ECBBE27`).
-- **CPU Inference**: Standard CPU execution is fully supported. No special GPU or CUDA hardware is required.
-- **Hardware Acceleration**: If compatible local acceleration is available through PyTorch, the engine utilizes it automatically or via `device="cuda"`.
-- **Zero-Distortion Pipeline**: Decodes RGB pixels directly without applying CLAHE or lossy compression passes that could suppress fine pathology boundaries.
+DentalTensor Vision applies an empirical, two-stage calibration strategy:
+
+1. **Calculus (`0.35`)**: Tartar deposits along the gingival line often blend with tooth enamel under diffuse lighting. A sensitive cutoff preserves detection of early supragingival calculus.
+2. **Caries (`0.55`)**: Deep occlusal fissures, natural pits, and dental amalgams can visually resemble decay. A conservative threshold suppresses false alarms on benign anatomy.
+3. **Gingivitis (`0.50`)**: Balanced operating point detecting marginal gum redness and edema while filtering lighting-induced pink reflections.
+4. **Tooth Discoloration (`0.65`)**: Natural shade variations across canine vs. incisor teeth require an elevated cutoff to prevent normal dentition from triggering alerts.
+5. **Oral Ulcer (`0.65`)**: High-specificity cutoff targeting clear mucosal breaks and aphthous lesions.
+6. **Global Fallback (`0.50`)**: Default threshold for uncalibrated or out-of-distribution queries.
 
 ---
 
-## 11. Training Provenance vs. Inference
+## Architecture
 
-The distinction between model development and end-user inference is absolute:
+DentalTensor Vision v1.0 is a custom-trained oral pathology object detection model built on the Ultralytics YOLO11n architecture.
+
+- **Base Architecture**: Ultralytics YOLO11n (nano detection model)
+- **Parameters**: 2,590,815 (verified via checkpoint introspection)
+- **FLOPs**: 6.5 GFLOPs at standard 640×640 input resolution
+- **Execution**: Designed for local edge and CPU execution, removing the need for dedicated GPU hardware in screening clinics.
+
+---
+
+## Training Provenance
+
+The model development process is distinct from runtime usage:
 
 ```
-TRAINING (Already completed by DentalTensor development):
-10,698+ dental images ──► fine-tuning & calibration ──► learned parameters ──► dentaltensor_vision_v1.0.pt
+MODEL DEVELOPMENT (Completed):
+10,698 dental images ──► Task-specific fine-tuning ──► Checkpoint: dentaltensor_vision_v1.0.pt
 
-INFERENCE (What users perform):
-dentaltensor_vision_v1.0.pt + new dental image ──► DentalTensor Vision ──► structured visual findings
+RUNTIME INFERENCE (User Workflow):
+User photo + dentaltensor_vision_v1.0.pt ──► DentalTensor Vision ──► Structured visual findings
 ```
 
-> [!NOTE]
-> **Dataset Not Required**: The training dataset is not required for inference. DentalTensor Vision v1.0 ships with the learned model weights. Users only perform inference.
-
-### Dataset Provenance (For Research Transparency)
-- **Primary Pathology Dataset (`oral-disease.yolov11`)**: 10,698 dental images (Train: 8,558, Val: 1,070, Test: 1,070) with 62,720 annotated bounding boxes and 570 empty-label negative controls. License: CC BY 4.0.
-- **Auxiliary Controls**: Healthy dentition pools mined to aggressively suppress false-positive discoloration predictions on clean teeth.
+### Dataset Provenance (Research Transparency)
+- **Primary Pathology Dataset**: 10,698 clinical dental photographs (Train: 8,558, Validation: 1,070, Test: 1,070) with 62,720 annotated bounding boxes and 570 empty-label negative control images. Sourced under CC BY 4.0.
+- **Hard-Negative Mining**: Dedicated clean-dentition pools were utilized during training iterations to expose the model to healthy teeth, preventing benign enamel translucency from generating false-positive discoloration or caries detections.
+- **Pre-trained Distribution**: The training dataset is not required at runtime. The checkpoint ships directly inside the repository.
 
 ---
 
-## 12. Calibration
+## Inference Requirements
 
-Raw model predictions exhibit varying confidence distributions across condition classes. DentalTensor applies empirical, class-specific production cutoffs:
+DentalTensor Vision is designed for minimal operational overhead:
 
-- **Calculus (0.35)**: High sensitivity for faint tartar deposits along the gingival line.
-- **Caries (0.55)**: Conservative threshold preventing false alarms on deep occlusal fissures.
-- **Gingivitis (0.50)**: Balanced threshold for visible gum erythema.
-- **Tooth Discoloration (0.65)**: Elevated cutoff preventing natural tooth shade variation from triggering alerts.
-- **Oral Ulcer (0.65)**: Specific threshold for distinct mucosal ulcerations.
-
----
-
-## 13. Limitations & Medical Disclaimer
-
-> [!CAUTION]
-> **Not a Medical Device**: DentalTensor Vision v1.0 is an artificial intelligence research and visual screening tool. It is **not** a certified medical device, does not provide definitive clinical diagnoses, and must never replace an examination by a licensed dentist or oral healthcare professional.
-
-- **Subgingival & Interproximal Pathology**: Standard RGB photography cannot detect subgingival calculus concealed below the gumline or interproximal decay between tight contacts. Dental radiographs (bitewing/periapical X-rays) remain mandatory.
-- **Visual Variations**: Benign pigmentation, restorative margins, and natural dental anatomy can occasionally resemble pathology under poor lighting or severe glare.
-- **Image Quality**: Motion blur, extreme underexposure, or low resolution can degrade detection confidence.
+- **Compute**: Standard x86_64 or ARM64 CPU. Dedicated GPU hardware (NVIDIA CUDA) is supported but not required.
+- **Storage**: ~20 MB for package code and weights (`models/dentaltensor_vision_v1.0.pt` is 5.45 MB).
+- **Network**: Zero external network requests during inference. All processing is 100% offline and local.
+- **Python**: >=3.9 (tested on Python 3.9, 3.10, 3.11, and 3.12).
 
 ---
 
-## 14. First Production Integration: DaantShaant
+## Limitations and Medical Disclaimer
 
-DentalTensor was conceived, trained, and battle-tested within **DaantShaant**, an oral health screening and care-navigation platform created by Nathan Asif for the Alibaba Cloud Bano Qabil Hackathon 2026. Within DaantShaant, DentalTensor Vision serves as the foundational perception layer powering automated dental assessments.
+> **IMPORTANT: Not a Certified Medical Device**<br>
+> DentalTensor Vision v1.0 is an artificial intelligence research and visual screening tool. It is **not** a certified medical diagnostic device and does not provide clinical diagnoses. It is designed to assist screening workflows and must never replace direct clinical examination, diagnostic radiographs, or treatment planning by a licensed dental professional.
+
+- **Visible-Light Photography Limitations**: DentalTensor operates exclusively on standard 2D photographic images of visible oral surfaces. Some dental conditions cannot be reliably assessed from visible-light photographs alone (such as interproximal caries between tight contacts, subgingival calculus concealed beneath the gumline, root resorption, or periapical conditions) and may require clinical examination, radiography, or other diagnostic methods.
+- **Visual Confounders**: Detection performance can vary with image quality, lighting, framing, motion blur, saliva reflections, dental restorations (amalgam, composite, crowns), and capture conditions.
+- **Screening Nature**: DentalTensor Vision is a visual screening and detection model. It does not guarantee detection of every condition, and visual photographs cannot represent all clinically relevant dental information. Output bounding boxes denote visible regions of interest for professional evaluation, not clinical diagnoses.
 
 ---
 
-## 15. Roadmap
+## DaantShaant Integration
 
-### v1.x (Current)
-Pre-trained local inference:
-- CPU inference
-- Compatible local acceleration
-- Python API (`DentalTensorVision()`)
-- CLI (`dentaltensor predict`)
-- Calibrated production thresholds
-- Model quality patches and evaluation tools
-- Packaging improvements
+DentalTensor was conceived, trained, and productized by Nathan Asif as the core vision engine for **DaantShaant**, an oral health screening and care-navigation platform developed for the Alibaba Cloud Bano Qabil Hackathon 2026.
 
-### v2.0
-Advanced inference and deployment options:
-- Explicit optimized CUDA workflows
-- Batching pipelines
-- ONNX export
-- TensorRT acceleration
-- Additional runtime backends
-- Optional hosted inference
-- Improved performance and model variants
+Within DaantShaant, DentalTensor Vision functions as the standalone perception layer that analyzes oral photographs and supplies structured findings to downstream user-facing screening workflows.
 
-### v3.0
-Optional pluggable AI/report layer:
+---
+
+## Project Structure
+
 ```
-DentalTensor Vision ──► structured findings ──► optional AI provider ──► formatted report / downstream workflow
+DentalTensor-Vision/
+├── assets/
+│   ├── dentaltensor-logo.png      # Official project logo
+│   └── metrics/
+│       ├── confusion_matrix.png   # Audited class confusion matrix
+│       └── training_results.png   # Training loss and mAP convergence curves
+├── docs/                          # Technical documentation
+├── examples/
+│   ├── python_usage.py            # Complete Python SDK usage walkthrough
+│   └── test_dentaltensor.py       # Quick verification script
+├── models/
+│   └── dentaltensor_vision_v1.0.pt # Shipped pre-trained model weights (5.45 MB)
+├── src/
+│   └── dentaltensor/
+│       ├── cli.py                 # Offline CLI commands
+│       ├── config.py              # Canonical constants & threshold definitions
+│       ├── schemas.py             # Pydantic result & finding data schemas
+│       ├── vision.py              # Main DentalTensorVision engine class
+│       └── inference/
+│           ├── detector.py        # YOLO11n model loader & raw inference engine
+│           ├── postprocessing.py  # Coordinate normalization & metadata extraction
+│           ├── preprocessing.py   # Zero-distortion image loading & validation
+│           └── thresholds.py      # Class-specific confidence filtering logic
+├── tests/                         # Unit and regression test suite (current release validation: 40 tests passed)
+├── CHANGELOG.md                   # Version release notes
+├── CITATION.cff                   # Citation metadata in CFF format
+├── CONTRIBUTING.md                # Contribution guidelines
+├── LICENSE                        # AGPL-3.0 license text
+├── MODEL_CARD.md                  # Comprehensive machine learning model card
+├── NOTICE.md                      # Attribution and third-party notices
+├── pyproject.toml                 # Packaging, dependencies, and entrypoints
+└── ROADMAP.md                     # Architecture roadmap (v1.x, v2.0, v3.0)
 ```
-Potential provider adapters: Qwen, Gemini, OpenAI, Claude, local LLM, custom provider.  
-*The core vision model will always remain independently usable without an LLM.*
 
 ---
 
-## 16. License
+## Roadmap
 
-DentalTensor Vision is released under the **GNU Affero General Public License v3.0 (AGPL-3.0-only)**.  
-See the full text in [LICENSE](LICENSE).
+DentalTensor follows an explicit modular evolution plan:
 
-### Attribution
-DentalTensor Vision v1.0 is built on the Ultralytics YOLO11n architecture. Full third-party notices and acknowledgments are documented in [NOTICE.md](NOTICE.md).
+- **v1.x (Current Release)**: Pre-trained local inference, CPU/acceleration execution, Python SDK, offline CLI, calibrated class thresholds, zero-distortion image pipeline.
+- **v2.0 (High-Throughput Deployment)**: Optimized CUDA execution, batch processing pipelines, standardized ONNX Runtime export, TensorRT acceleration, and optional microservice deployment adapters.
+- **v3.0 (Pluggable Report Generation)**: Optional provider adapters (Qwen, Gemini, OpenAI, Claude, local LLMs) for synthesizing patient explanations and summaries. *The core DentalTensor Vision model will always remain usable independently without requiring any LLM.*
+
+See [ROADMAP.md](ROADMAP.md) for full milestone specifications.
 
 ---
 
-## 17. Citation
+## License
 
-If you use DentalTensor Vision in your research or application, please cite:
+DentalTensor Vision is released under the **GNU Affero General Public License v3.0 (AGPL-3.0-only)**. See [LICENSE](LICENSE) for the full license text.
+
+### Third-Party Attribution
+DentalTensor Vision v1.0 is built on the Ultralytics YOLO11n architecture. The underlying YOLO architecture and deep learning framework were created and maintained by [Ultralytics](https://github.com/ultralytics/ultralytics). Comprehensive third-party notices are documented in [NOTICE.md](NOTICE.md).
+
+---
+
+## Citation
+
+If you use DentalTensor Vision in your research, clinical studies, or software applications, please cite:
 
 ```bibtex
-@software{dentaltensor_vision_2026,
-  author = {Nathan Asif},
-  title = {DentalTensor Vision: Open-Source Oral Pathology Computer Vision},
-  version = {1.0.0},
-  year = {2026},
-  url = {https://github.com/Nathan-Asif/DentalTensor-Vision}
+@software{asif_dentaltensor_vision_2026,
+  author       = {Nathan Asif},
+  title        = {DentalTensor Vision: Pre-Trained Oral Pathology Computer Vision},
+  version      = {1.0.0},
+  year         = {2026},
+  url          = {https://github.com/Nathan-Asif/DentalTensor-Vision}
 }
 ```
 
 ---
 
-## 18. Contributing
+## Contributing
 
-Contributions are welcomed! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines on code style, testing, and pull requests.
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) for details on our code style, test requirements, and pull request workflow.
+
+---
+
+## Developer
+
+**Nathan Asif**<br>
+Founder & Developer, DentalTensor<br>
+Creator, DaantShaant<br>
+Repository: [DentalTensor-Vision](https://github.com/Nathan-Asif/DentalTensor-Vision)
