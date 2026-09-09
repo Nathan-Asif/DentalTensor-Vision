@@ -56,3 +56,6 @@ Thumbs.db
 
 tests/
 tests/*
+
+# Private project planning
+ROADMAP.md

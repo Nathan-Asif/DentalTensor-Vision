@@ -391,23 +391,9 @@ DentalTensor-Vision/
 ├── LICENSE                        # AGPL-3.0 license text
 ├── MODEL_CARD.md                  # Comprehensive machine learning model card
 ├── NOTICE.md                      # Attribution and third-party notices
-├── pyproject.toml                 # Packaging, dependencies, and entrypoints
-└── ROADMAP.md                     # Architecture roadmap (v1.x, v2.0, v3.0)
+└── pyproject.toml                 # Packaging, dependencies, and entrypoints
 ```
 
----
-
-## Roadmap
-
-DentalTensor follows an explicit modular evolution plan:
-
-- **v1.x (Current Release)**: Pre-trained local inference, CPU/acceleration execution, Python SDK, offline CLI, calibrated class thresholds, zero-distortion image pipeline.
-- **v2.0 (High-Throughput Deployment)**: Optimized CUDA execution, batch processing pipelines, standardized ONNX Runtime export, TensorRT acceleration, and optional microservice deployment adapters.
-- **v3.0 (Pluggable Report Generation)**: Optional provider adapters (Qwen, Gemini, OpenAI, Claude, local LLMs) for synthesizing patient explanations and summaries. *The core DentalTensor Vision model will always remain usable independently without requiring any LLM.*
-
-See [ROADMAP.md](ROADMAP.md) for full milestone specifications.
-
----
 
 ## License
 
