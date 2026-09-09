@@ -1,0 +1,19 @@
+cff-version: 1.2.0
+message: "If you use DentalTensor Vision in your research or application, please cite it as below."
+authors:
+  - family-names: "Asif"
+    given-names: "Nathan"
+title: "DentalTensor Vision: Open-Source Oral Pathology Computer Vision"
+version: 1.0.0
+date-released: 2026-09-08
+url: "https://github.com/Nathan-Asif/DentalTensor-Vision"
+repository-code: "https://github.com/Nathan-Asif/DentalTensor-Vision"
+keywords:
+  - "computer vision"
+  - "oral pathology"
+  - "dentistry"
+  - "object detection"
+  - "yolo11"
+  - "pre-trained"
+  - "inference"
+license: AGPL-3.0-only
