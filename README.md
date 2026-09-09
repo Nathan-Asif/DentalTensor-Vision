@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="assets/dentaltensor-banner.png" alt="DentalTensor" width="180">
+  <img src="assets/dentaltensor-banner.png" alt="DentalTensor Vision" width="100%">
 </p>
 
 # DentalTensor Vision
